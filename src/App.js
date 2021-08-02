@@ -17,7 +17,7 @@ import Temp from "./Temp";
 import "./App.css";
 
 const App = () => {
-  const [token, setToken] = useState({});
+  const [token, setToken] = useState({token:""});
   function handleTransfer(tokenJson) {
     setToken(tokenJson);
   }
@@ -29,10 +29,10 @@ const App = () => {
             <Temp tokenHandler={handleTransfer} />
           </Route>
           <Route path="/sign-in">
-            <Temp />
+            <Temp tokenHandler={handleTransfer} />
           </Route>
           <Route path="/portfolio">
-            <Portf tokenid={token} />
+          {token.token !== "" && <Portf tokenValue={token} />}
           </Route>
         </Switch>
       </div>

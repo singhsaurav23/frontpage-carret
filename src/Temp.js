@@ -13,6 +13,9 @@ import SignInForm from "./pages/SignInForm";
 import imgg from "./imgg.png";
 
 const Temp = (props) => {
+  const onAddToken = (objec) => {
+    props.tokenHandler(objec);
+  };
   return (
     <div className="App">
       <div className="App__Aside">
@@ -54,19 +57,12 @@ const Temp = (props) => {
           >
             Sign Up
           </NavLink>
-          <NavLink
-            to="/portfolio"
-            activeClassName="FormTitle__Link--Active"
-            className="FormTitle__Link"
-          >
-            Portfolio
-          </NavLink>
         </div>
         <Route exact path="/">
           <SignUpForm />
         </Route>
         <Route path="/sign-in">
-          <SignInForm tokenHandle={props.tokenHandler} />
+          <SignInForm tokenHandled={onAddToken} />
         </Route>
       </div>
     </div>

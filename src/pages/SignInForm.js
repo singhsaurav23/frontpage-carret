@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function SignInForm(props) {
   const [email, setEmail] = useState("");
@@ -8,6 +8,7 @@ function SignInForm(props) {
   const [submitt, setSubmitt] = useState(false);
   const [otp, setOTP] = useState("");
   // const [token, setToken] = useState({});
+  const [valid, setValid] = useState(true);
 
   function handleEmail(e) {
     setEmail(e.target.value);
@@ -25,36 +26,45 @@ function SignInForm(props) {
     setSubmitt(true);
     const obj = {
       emailId: email,
-      pass: password,
+      password: password,
     };
     // console.log(obj);
 
-    const res = await fetch("api/auth/email", {
+    await fetch("api/auth/email", {
       method: "POST",
       body: JSON.stringify(obj),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const dat = await res.json();
-    console.log(dat);
   }
 
   async function otpClickHandler() {
+    // console.log(otp);
     const objec = {
       emailId: email,
       password: password,
       oTp: otp,
     };
     // console.log(objec);
-    await fetch("api/auth/login", {
+    const res = await fetch("api/auth/login", {
       method: "POST",
       body: JSON.stringify(objec),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    
+    // console.log(res);
+    const data = await res.json();
+    // console.log(data);
+    // console.log(data["token"]);
+    // setValid(true);
+    // props.tokenHandled(data);
+    if (data["token"] !== null) {
+      // console.log(data["token"]);
+      setValid(true);
+      props.tokenHandled(data);
+    }
   }
 
   return (
@@ -118,16 +128,29 @@ function SignInForm(props) {
                 name="otp"
                 value={otp}
                 onChange={handleOTP}
+                autoComplete="off"
                 required={true}
               />
             </div>
             <div className="FormField">
-              <button
-                className="FormField__Button mr-20"
-                onClick={otpClickHandler}
-              >
-                Verify
-              </button>
+              {valid && (
+                <NavLink to="/portfolio">
+                  <button
+                    className="FormField__Button mr-20"
+                    onClick={otpClickHandler}
+                  >
+                    Verify
+                  </button>
+                </NavLink>
+              )}
+              {!valid && (
+                <button
+                  className="FormField__Button mr-20"
+                  onClick={otpClickHandler}
+                >
+                  Verify
+                </button>
+              )}
             </div>
           </>
         )}

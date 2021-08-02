@@ -5,10 +5,12 @@ import { Pie } from "react-chartjs-2";
 const Piechart = (props) => {
   let sum = 0;
   let arr = [];
+  let amounts = [];
   let i = 0;
   props.data.forEach(function (arrayItem) {
-    if (arrayItem.amount !== "0") {
+    if (arrayItem.amount_usd !== "0") {
       arr[i] = arrayItem.name;
+      amounts[i] = arrayItem.amount_usd;
     }
     const val = arrayItem.amount_usd;
     sum += parseInt(val);
@@ -16,14 +18,14 @@ const Piechart = (props) => {
   });
 
   console.log(arr);
+  console.log(amounts);
   const state = {
     labels: arr,
     datasets: [
       {
-        label: "Rainfall",
-        backgroundColor: ["#fac534", "#f59c17", "#fce731"],
-        hoverBackgroundColor: ["#fac534c7", "#f59c17c4", "#faf61ca8"],
-        data: [90000, 50000, 70000],
+        backgroundColor: ["#fac534", "#f59c17", "#fce731", "ffffff"],
+        hoverBackgroundColor: ["#fac534c7", "#f59c17c4", "#faf61ca8", "ff00ff"],
+        data: amounts,
         radius: "80%",
       },
     ],

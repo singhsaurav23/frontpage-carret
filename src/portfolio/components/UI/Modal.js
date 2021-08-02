@@ -11,7 +11,7 @@ const Modal = (props) => {
   const [ftxselected, setFtxSelected] = useState(false);
 
   const nameHandler = (event) => {
-    if (event.target.value == "FTX") {
+    if (event.target.value === "FTX") {
       setFtxSelected(true);
     } else {
       setFtxSelected(false);
@@ -27,7 +27,8 @@ const Modal = (props) => {
     setApiSecret(event.target.value);
   };
 
-  const submitHandler = () => {
+  const submitHandler = (event) => {
+    event.preventDefault();
     props.onAddExchange(ename, apiKey, apiSecret);
   };
 
@@ -44,16 +45,30 @@ const Modal = (props) => {
         <form onSubmit={submitHandler} className={styles.form}>
           <div className={styles.sub}>
             <label htmlFor="name">Exchange Name</label>
-            <select
-              id="exchange"
-              name="exchange"
-              onChange={nameHandler}
-              value={ename}
-            >
-              <option value="Coinbase">CoinBase</option>
-              <option value="FTX">FTX</option>
-              <option value="Binance">Binance</option>
-            </select>
+            {props.isDisabled === true ? (
+              <select
+                id="exchange"
+                name="exchange"
+                onChange={nameHandler}
+                value={ename}
+                disabled="disabled"
+              >
+                <option value="Coinbase">CoinBase</option>
+                <option value="FTX">FTX</option>
+                <option value="Binance">Binance</option>
+              </select>
+            ) : (
+              <select
+                id="exchange"
+                name="exchange"
+                onChange={nameHandler}
+                value={ename}
+              >
+                <option value="Coinbase">CoinBase</option>
+                <option value="FTX">FTX</option>
+                <option value="Binance">Binance</option>
+              </select>
+            )}
           </div>
           {ftxselected && (
             <div className={styles.sub}>
