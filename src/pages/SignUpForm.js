@@ -62,7 +62,7 @@ function SignUpForm() {
     };
     //console.log(obj);
 
-    await fetch("api/auth/email", {
+    await fetch("https://carret-website.herokuapp.com/api/auth/email", {
       method: "POST",
       body: JSON.stringify(obj),
       headers: {
@@ -84,7 +84,7 @@ function SignUpForm() {
     };
     // console.log(objec);
 
-    const res = await fetch("api/auth/signup", {
+    const res = await fetch("https://carret-website.herokuapp.com/api/auth/signup", {
       method: "POST",
       body: JSON.stringify(objec),
       headers: {

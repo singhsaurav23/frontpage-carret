@@ -217,7 +217,7 @@ const ExchangeList = (props) => {
     //api/profiles
     const obj = exchanges.find((item) => item.id === fixedId);
     console.log(obj);
-    await fetch("api/profiles", {
+    await fetch("https://carret-website.herokuapp.com/api/profiles", {
       method: "POST",
       body: JSON.stringify(obj),
       headers: {
@@ -237,7 +237,7 @@ const ExchangeList = (props) => {
     // console.log(tokens.token);
     const toke = "Bearer ";
     const tokenId = toke.concat(tokens.token);
-      await fetch(`api/profiles/${fixedId}`, {
+      await fetch(`https://carret-website.herokuapp.com/api/profiles/${fixedId}`, {
         method: "PUT",
         body: JSON.stringify(obj),
         headers: {
@@ -287,7 +287,7 @@ const ExchangeList = (props) => {
     // console.log(tokens.token);
     const toke = "Bearer ";
     const tokenId = toke.concat(tokens.token);
-    const res = await fetch("api/profiles", {
+    const res = await fetch("https://carret-website.herokuapp.com/api/profiles", {
       method: "POST",
       body: JSON.stringify(obj),
       headers: {
@@ -328,7 +328,7 @@ const ExchangeList = (props) => {
     // console.log(tokens.token);
     const toke = "Bearer ";
     const tokenId = toke.concat(tokens.token);
-    await fetch(`api/delete/${obj.dbid}`, {
+    await fetch(`https://carret-website.herokuapp.com/api/delete/${obj.dbid}`, {
       method: "PUT",
       body: JSON.stringify(obj),
       headers: {

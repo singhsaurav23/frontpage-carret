@@ -30,7 +30,7 @@ function SignInForm(props) {
     };
     // console.log(obj);
 
-    await fetch("api/auth/email", {
+    await fetch("https://carret-website.herokuapp.com/api/auth/email", {
       method: "POST",
       body: JSON.stringify(obj),
       headers: {
@@ -47,7 +47,7 @@ function SignInForm(props) {
       oTp: otp,
     };
     // console.log(objec);
-    const res = await fetch("api/auth/login", {
+    const res = await fetch("https://carret-website.herokuapp.com/api/auth/login", {
       method: "POST",
       body: JSON.stringify(objec),
       headers: {

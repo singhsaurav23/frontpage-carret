@@ -23,7 +23,7 @@ function Portf(props) {
   // console.log(tokens.token);
   const toke = "Bearer ";
   const tokenId = toke.concat(tokens.token);
-  const res = await fetch("api/amount", {
+  const res = await fetch("https://carret-website.herokuapp.com/api/amount", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
